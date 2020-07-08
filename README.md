@@ -116,14 +116,14 @@ catkin build mav_voxblox_planning
 
 ## Important changes
 
-The [original repository](https://github.com/ethz-asl/mav_voxblox_planning)fails to compile due to an error about `uint32_t tmp_byte_offset` in the file `skeleton_io.cpp`. This has been fixed by changing the line to `uint64_t tmp_byte_offset = 0` in this repo.
+The [original repository](https://github.com/ethz-asl/mav_voxblox_planning) fails to compile due to an error about `uint32_t tmp_byte_offset;` in the file `skeleton_io.cpp`. This has been fixed by changing the line to `uint64_t tmp_byte_offset = 0;` in this repo.
 
 Also, the original repository fails to compile when it tries to build the voxblox_rrt_planning package, which relies on ompl. To fix this issue, remove the default ompl installed with ros (if already installed), then install libompl-dev:
 ```
 sudo apt-get remove ros-melodic-ompl
 sudo apt-get install libompl-dev
 ```
-This repo adds this [line]() to the CMakeLists.txt of voxblox_rrt_planner to link to the ompl library to the project.
+This repo adds this [line](https://github.com/BritskNguyen/mav_voxblox_planning/blob/07748b3982b242b89515ead43f3725abb6a522ae/voxblox_rrt_planner/CMakeLists.txt#L7) to the CMakeLists.txt of voxblox_rrt_planner to link to the ompl library to the project. Feel free to modify the link according to your system.
 
 
 ## Download maps
