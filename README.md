@@ -75,7 +75,7 @@ If using these, please cite:
       </p>
 
 # Getting Started
-## Installation
+## Installation (see Important changes below)
 For this forked repo, I have only succeed in compiling it on Ubuntu 18.04 and [ROS melodic](http://wiki.ros.org/kinetic/Installation/Ubuntu).
 After installing ROS, install some extra dependencies:
 ```
