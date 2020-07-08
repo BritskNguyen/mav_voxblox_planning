@@ -4,6 +4,8 @@ project(voxblox_rrt_planner)
 find_package(catkin_simple REQUIRED)
 catkin_simple(ALL_DEPS_REQUIRED)
 
+set(OMPL_LIBRARIES "/usr/lib/x86_64-linux-gnu/libompl.so")
+
 add_definitions(-std=c++11)
 
 #############

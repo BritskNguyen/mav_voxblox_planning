@@ -76,21 +76,21 @@ If using these, please cite:
 
 # Getting Started
 ## Installation
-This package is intended to be used with Ubuntu 16.04 and [ROS kinetic](http://wiki.ros.org/kinetic/Installation/Ubuntu) or above.
-After installing ROS, install some extra dependencies, substituting kinetic for your ROS version as necessary:
+For this forked repo, I have only succeed in compiling it on Ubuntu 18.04 and [ROS melodic](http://wiki.ros.org/kinetic/Installation/Ubuntu).
+After installing ROS, install some extra dependencies:
 ```
-sudo apt-get install ros-kinetic-cmake-modules python-wstool python-catkin-tools libyaml-cpp-dev protobuf-compiler autoconf
+sudo apt-get install ros-melodic-cmake-modules python-wstool python-catkin-tools libyaml-cpp-dev protobuf-compiler autoconf
 ```
 Then if not already done so, set up a new catkin workspace:
 ```
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws
 catkin init
-catkin config --extend /opt/ros/kinetic
+catkin config --extend /opt/ros/melodic
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release
 catkin config --merge-devel
 ```
-If using [**SSH keys for github**](https://help.github.com/articles/connecting-to-github-with-ssh/) (recommended):
+If using [**SSH keys for github**](https://help.github.com/articles/connecting-to-github-with-ssh/) (this is to help download the required packages without prompting the git account input, recommended):
 ```
 cd ~/catkin_ws/src/
 git clone git@github.com:ethz-asl/mav_voxblox_planning.git
@@ -113,6 +113,18 @@ Compile:
 cd ~/catkin_ws/src/
 catkin build mav_voxblox_planning
 ```
+
+## Important changes
+
+The [original repository](https://github.com/ethz-asl/mav_voxblox_planning)fails to compile due to an error about `uint32_t tmp_byte_offset` in the file `skeleton_io.cpp`. This has been fixed by changing the line to `uint64_t tmp_byte_offset = 0` in this repo.
+
+Also, the original repository fails to compile when it tries to build the voxblox_rrt_planning package, which relies on ompl. To fix this issue, remove the default ompl installed with ros (if already installed), then install libompl-dev:
+```
+sudo apt-get remove ros-melodic-ompl
+sudo apt-get install libompl-dev
+```
+This repo adds this [line]() to the CMakeLists.txt of voxblox_rrt_planner to link to the ompl library to the project.
+
 
 ## Download maps
 We've prepared a number of maps for you to try out our planning on.
